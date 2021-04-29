@@ -2050,15 +2050,15 @@ __webpack_require__.r(__webpack_exports__);
               document.getElementById("right").play();
               self.$forceUpdate();
               setTimeout(function () {
-                self.$emit('correct');
+                self.$emit('correct', self.answers[i]);
                 setTimeout(function () {
                   self.on = [];
                   self.correct = [];
                 }, 250);
                 self.imageHappy = false;
                 setTimeout(function () {
-                  self.see = [true, true, true, true];
                   self.helpQuestion = 0;
+                  self.see = [true, true, true, true];
                 }, 500);
               }, 8000);
             } else {
@@ -2279,7 +2279,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      level: 0,
+      level: 9,
       question: [],
       prize: [],
       error: 0,
@@ -2291,12 +2291,12 @@ __webpack_require__.r(__webpack_exports__);
     this.next();
   },
   methods: {
-    next: function next() {
+    next: function next(payload) {
       var _this = this;
 
       this.level++;
 
-      if (this.level == 11) {
+      if (this.level == 11 && payload.correct) {
         this.win();
       } else {
         axios.get("api/questions/".concat(this.level)).then(function (response) {
@@ -2368,7 +2368,7 @@ __webpack_require__.r(__webpack_exports__);
     end: function end() {
       this.$emit('gameOver', this.error);
     },
-    win: function win() {
+    win: function win(payload) {
       this.$emit('millionaire');
     }
   }

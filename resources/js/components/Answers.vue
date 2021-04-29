@@ -86,7 +86,7 @@ export default {
                      self.$forceUpdate();
 
                      setTimeout(function(){
-                        self.$emit('correct');
+                        self.$emit('correct', self.answers[i]);
                         
                         setTimeout(function(){
                            self.on = [];
@@ -95,8 +95,8 @@ export default {
                         
                         self.imageHappy = false;
                         setTimeout(function(){
-                           self.see = [true, true, true, true];
                            self.helpQuestion = 0;
+                           self.see = [true, true, true, true];
                         }, 500)
 
 

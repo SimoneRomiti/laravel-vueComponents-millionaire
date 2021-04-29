@@ -36,7 +36,7 @@ export default {
 
    data(){
       return {
-         level: 0,
+         level: 9,
          question: [],
          prize: [],
          error: 0,
@@ -51,9 +51,9 @@ export default {
    },
 
    methods: {
-      next(){         
+      next(payload){         
          this.level++;
-         if(this.level == 11){
+         if(this.level == 11 && payload.correct){
             this.win();
          } else {
             axios
@@ -124,7 +124,7 @@ export default {
          this.$emit('gameOver', this.error);
       },
 
-      win(){
+      win(payload){
          this.$emit('millionaire');
       }
    }
