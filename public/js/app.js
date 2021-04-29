@@ -2279,7 +2279,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      level: 9,
+      level: 0,
       question: [],
       prize: [],
       error: 0,
