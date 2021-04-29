@@ -2,7 +2,10 @@
    <ul>
       <li v-for="answer, index in answers" :key="index" :class="{ chosen : on[index], success : correct[index], fail : error[index], real_correct: real[index] }" @click="clicked(index)" >
          <span :style="on[index] ? 'color:black' : ''">{{ answer.letter }}</span>
-         <p v-if="visible[index] && see[index]" class="animate__animated animate__fadeInLeft">{{ answer.option }}</p>
+
+         <transition name="slide-fade">
+            <p v-if="visible[index] && see[index]">{{ answer.option }}</p>
+         </transition>
       </li>
 
       <div id="help">
@@ -419,6 +422,18 @@ export default {
                font-size: 40px;
             }
          }
+      }
+
+      .slide-fade-enter-active {
+         transition: all .8s ease;
+      }
+      .slide-fade-leave-active {
+         transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+      }
+      .slide-fade-enter, .slide-fade-leave-to
+         /* .slide-fade-leave-active below version 2.1.8 */ {
+         transform: translateX(-30px);
+         opacity: 0;
       }
    }
 </style>
